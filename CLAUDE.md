@@ -8,15 +8,20 @@ This is a React + Vite finance tracker application (starter project). The app cu
 
 ## Architecture
 
-**Single-file React app pattern:**
-- `src/App.jsx` - Contains entire app: state, logic, and UI (transactions data, form, summary cards, filters, table)
+**Component-based React app:**
+- `src/App.jsx` - Main container: holds state, calculates totals, renders child components
 - `src/main.jsx` - React entry point rendering App in root div
 - `src/index.css` - Global styles
-- No external components, services, or hooks yet
 
-**State management:** useState for transactions array and form inputs (description, amount, type, category, filters)
+**Components in `src/components/`:**
 
-**Styling approach:** CSS classes in `App.css` (currently referenced but not created in starter)
+1. **Summary.jsx** - Displays income/expenses/balance summary cards. Self-contained with its own calculations.
+2. **TransactionForm.jsx** - Form for adding new transactions. Receives state setters and submit handler as props.
+3. **TransactionsList.jsx** - Displays filtered transactions table with filter dropdowns.
+
+**State management:** useState in App for transactions array and form inputs (description, amount, type, category, filters)
+
+**Styling approach:** Each component has its own CSS file (Summary.css, TransactionForm.css, TransactionsList.css) plus App.css for non-component styles.
 
 **Vite config:** Standard React plugin configuration in `vite.config.js`
 
@@ -52,19 +57,8 @@ npx vitest
 
 1. **Hardcoded data** - Sample transactions in useState instead of local storage or API
 2. **No persistence** - Transactions reset on page refresh
-3. **Poor UI** - Minimal styling, uses basic form controls
-4. **No validation** - Form accepts empty values
-5. **Static category options** - Categories shown only in dropdowns
-6. **No edit/delete** - Cannot modify or remove transactions
-
-## Component Splitting Pattern
-
-When refactoring, split App.jsx into:
-
-- `src/components/TransactionForm.jsx` - Add transaction form
-- `src/components/TransactionsList.jsx` - Table with filters
-- `src/components/SummaryCards.jsx` - Income/expenses/balance cards
-- `src/context/FinanceContext.jsx` - Shared state logic
+3. **No validation** - Form accepts empty values
+4. **No edit/delete** - Cannot modify or remove transactions
 
 ## Data Model
 
@@ -72,7 +66,7 @@ When refactoring, split App.jsx into:
 interface Transaction {
   id: number;
   description: string;
-  amount: string;
+  amount: number;  // Always stored as number (not string)
   type: 'income' | 'expense';
   category: string;
   date: string; // YYYY-MM-DD format
@@ -86,9 +80,17 @@ Valid categories: food, housing, utilities, transport, entertainment, salary, ot
 ```
 expense-tracker-starter/
 ├── src/
-│   ├── App.jsx          # Main app component
-│   ├── main.jsx         # Entry point
-│   └── index.css        # Global styles
+│   ├── components/
+│   │   ├── Summary.jsx            # Summary cards component
+│   │   ├── Summary.css            # Summary styles
+│   │   ├── TransactionForm.jsx    # Add transaction form
+│   │   ├── TransactionForm.css    # Form styles
+│   │   ├── TransactionsList.jsx   # Transactions table with filters
+│   │   └── TransactionsList.css   # Table styles
+│   ├── App.jsx                   # Main app container
+│   ├── App.css                   # App container styles
+│   ├── main.jsx                  # Entry point
+│   └── index.css                 # Global styles
 ├── index.html
 ├── package.json
 └── vite.config.js
