@@ -1,0 +1,15 @@
+.spending-chart {
+  padding: 20px;
+}
+
+.spending-chart h3 {
+  margin: 0 0 15px 0;
+  color: #333;
+  font-size: 1.2rem;
+}
+
+.spending-chart .XAxis-text {
+  fill: #666;
+  font-size: 12px;
+  font-family: sans-serif;
+}
