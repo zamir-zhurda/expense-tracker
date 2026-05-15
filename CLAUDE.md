@@ -37,21 +37,30 @@ npm run preview      # Preview production build
 
 # Code quality
 npm run lint         # Run ESLint
+
+# Deployment
+npm run deploy       # Run tests, build, and push to staging
+# Or use the custom skill: /deploy
 ```
 
 ## Test Commands
 
-Tests are not currently set up. To add tests later:
+Tests are configured with vitest. To run tests:
 
 ```bash
-# Install testing dependencies
-npm install --save-dev vitest @testing-library/react @testing-library/jest-dom jest
-
-# Run tests
-npm test
-# or
-npx vitest
+npm test             # Run all tests
 ```
+
+## Custom Deploy Skill
+
+The `/deploy` command runs a custom deployment workflow that:
+1. Runs all tests (`npm test`)
+2. Builds the production bundle (`npm run build`)
+3. Commits and pushes changes to the staging area
+
+**Usage:** Simply type `/deploy` in the CLI to run the full deployment pipeline.
+
+The skill automatically handles the entire deployment sequence, ensuring tests pass before pushing to the repository.
 
 ## Known Issues (Current Starter State)
 
