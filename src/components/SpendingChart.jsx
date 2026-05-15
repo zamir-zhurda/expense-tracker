@@ -14,7 +14,7 @@ function SpendingChart({ transactions }) {
     value: spendingByCategory[category]
   }))
 
-  const COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8']
+  const COLORS = ['#2d5a27', '#8b2727', '#4a2e5a', '#c9a96b', '#1a1a2e', '#55524d']
 
   return (
     <div className="spending-chart">

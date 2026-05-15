@@ -1,7 +1,7 @@
 function TransactionsList({ filteredTransactions, categories, filterType, setFilterType, filterCategory, setFilterCategory, handleDelete }) {
   return (
     <div className="transactions">
-      <h2>Transactions</h2>
+      <h2>Recent Transactions</h2>
       <div className="filters">
         <select value={filterType} onChange={(e) => setFilterType(e.target.value)}>
           <option value="all">All Types</option>
@@ -16,34 +16,44 @@ function TransactionsList({ filteredTransactions, categories, filterType, setFil
         </select>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Amount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTransactions.map(t => (
-            <tr key={t.id}>
-              <td>{t.date}</td>
-              <td>{t.description}</td>
-              <td>{t.category}</td>
-              <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
-                {t.type === "income" ? "+" : "-"}${t.amount.toFixed(2)}
-              </td>
-              <td>
-                <button className="delete-btn" onClick={() => handleDelete(t.id)}>
-                  Delete
-                </button>
-              </td>
+      {filteredTransactions.length === 0 ? (
+        <div style={{ padding: '32px', textAlign: 'center', color: 'var(--color-gray-400)' }}>
+          No transactions found
+        </div>
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredTransactions.map(t => (
+              <tr key={t.id}>
+                <td>{t.date}</td>
+                <td>{t.description}</td>
+                <td>{t.category}</td>
+                <td className={t.type === "income" ? "income-amount" : "expense-amount"}>
+                  {t.type === "income" ? "+" : "-"}${t.amount.toFixed(2)}
+                </td>
+                <td>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDelete(t.id)}
+                    aria-label={`Delete ${t.description}`}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   )
 }
