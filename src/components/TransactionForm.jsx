@@ -6,9 +6,9 @@ function TransactionForm({ description, setDescription, amount, setAmount, type,
       <h2>Add Transaction</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="desc">Description</label>
+          <label htmlFor="desc-input">Description</label>
           <input
-            id="desc"
+            id="desc-input"
             type="text"
             placeholder="e.g., Grocery shopping"
             value={description}
@@ -16,9 +16,9 @@ function TransactionForm({ description, setDescription, amount, setAmount, type,
           />
         </div>
         <div>
-          <label htmlFor="amt">Amount</label>
+          <label htmlFor="amount-input">Amount</label>
           <input
-            id="amt"
+            id="amount-input"
             type="number"
             placeholder="0.00"
             min="0.01"
